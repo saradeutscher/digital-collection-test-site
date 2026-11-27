@@ -7,12 +7,12 @@
     "subjects": ["Football", "Sports"],
     "people": [],
     "negatives": [
-      { "id": "1955-0001-01", "image": "neg-01", "caption": "A player is tackled during the game" },
-      { "id": "1955-0001-02", "image": "neg-02", "caption": "A player catching a pass during the game" },
-      { "id": "1955-0001-03", "image": "neg-03", "caption": "A player is tackled during the game" },
-      { "id": "1955-0001-04", "image": "neg-04", "caption": "A player is tackled during the game" },
-      { "id": "1955-0001-05", "image": "neg-05", "caption": "A player is tackled during the game" },
-      { "id": "1955-0001-06", "image": "neg-06", "caption": "A player is tackled during the game" }
+      { "id": "1955-0001-01", "image": "neg-01", "caption": "A player is tackled during the game, City of Vancouver Archives, Reference Code: AM54-S4-2-: CVA 371-936" },
+      { "id": "1955-0001-02", "image": "neg-02", "caption": "A player catching a pass during the game, City of Vancouver Archives, Reference Code: AM54-S4-2-: CVA 371-939" },
+      { "id": "1955-0001-03", "image": "neg-03", "caption": "A player is tackled during the game, City of Vancouver Archives, Reference Code: AM54-S4-2-: CVA 371-938" },
+      { "id": "1955-0001-04", "image": "neg-04", "caption": "A player is tackled during the game, City of Vancouver Archives, Reference Code: AM54-S4-2-: CVA 371-940" },
+      { "id": "1955-0001-05", "image": "neg-05", "caption": "A player is tackled during the game, City of Vancouver Archives, Reference Code: AM54-S4-2-: CVA 371-941" },
+      { "id": "1955-0001-06", "image": "neg-06", "caption": "A player is tackled during the game, City of Vancouver Archives, Reference Code: AM54-S4-2-: CVA 371-937" }
     ]
   },
   {
@@ -23,8 +23,8 @@
     "subjects": ["Person"],
     "people": ["Bing Crosby", "George C. Miller"],
     "negatives": [
-      { "id": "1948-0001-01", "image": "neg-07", "caption": "Bing at City Hall" },
-      { "id": "1948-0001-02", "image": "neg-08", "caption": "Bing with acting-Mayor George C. Miller on steps of City Hall admiring gift of 'Haida' slate totem pole" }
+      { "id": "1948-0001-01", "image": "neg-07", "caption": "Bing at City Hall, City of Vancouver Archives, Reference Code: AM68---: CVA 806-8" },
+      { "id": "1948-0001-02", "image": "neg-08", "caption": "Bing with acting-Mayor George C. Miller on steps of City Hall admiring gift of 'Haida' slate totem pole, City of Vancouver Archives, Reference Code: AM68---: CVA 806-9" }
     ]
   },
   {
@@ -34,7 +34,7 @@
     "place": "Stanley Park, Vancouver",
     "subjects": ["First Nations", "Indigenous", "Children"],
     "people": ["Charles Cates"],
-    "negatives": [{ "id": "1953-0001-01", "image": "neg-09", "caption": "Charles Cates Storytelling in Stanley Park" }]
+    "negatives": [{ "id": "1953-0001-01", "image": "neg-09", "caption": "Charles Cates Storytelling in Stanley Park, City of Vancouver Archives, Reference Code: AM54-S4-: Port P1263" }]
   },
   {
     "id": "1957-0001",
@@ -44,7 +44,7 @@
     "place": "Vancouver",
     "subjects": ["Firefighters", "Boats", "Piers"],
     "people": [],
-    "negatives": [{ "id": "1957-0001-01", "image": "neg-10", "caption": "Firefighters aiming hose at waterfront fire, fireboat in background" }]
+    "negatives": [{ "id": "1957-0001-01", "image": "neg-10", "caption": "Firefighters aiming hose at waterfront fire, fireboat in background, City of Vancouver Archives, Reference Code: COV-S280-: CVA 354-409" }]
   },
   {
     "id": "1948-0001",
@@ -55,7 +55,7 @@
     "subjects": ["Firefighters", "Portraits"],
     "people": [],
     "negatives": [
-      { "id": "1948-0001-01", "image": "neg-11", "caption": "Group portrait of firefighters" }
+      { "id": "1948-0001-01", "image": "neg-11", "caption": "Group portrait of firefighters, City of Vancouver Archives, Reference Code: COV-S280-: CVA 354-127" }
     ]
   },
   {

@@ -28,9 +28,8 @@ const when = formatDate(date, dateApproximate);
 
     {negatives.length > 0 ? (
       <scan-gallery>
-        {negatives.map((neg) => (
-          <ZoomViewer image={neg.image} label={neg.caption ?
-          `${neg.caption} (negative ${neg.id})` : `Negative ${neg.id}`} />
+        {negatives.map((neg, i) => (
+          <ZoomViewer image={neg.image} label={neg.caption ?? `Scan ${i + 1}`} />
         ))}
       </scan-gallery>
     ) : (
