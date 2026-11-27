@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/utils';
+---
+
+<Base title="Search">
+  <h1>Search the collection</h1>
+  <p class="meta">Search title, places and people, then narrow
+    by decade, subject, or place.</p>
+
+  <pagefind-config bundle-path={url('/pagefind/')} base-url={url('/')} faceted preload></pagefind-config>
+    <div class="search-layout">
+      <div class="search-main">
+        <pagefind-input placeholder='Try "hockey" or "Stanley Park"'>
+        </pagefind-input>
+        <pagefind-summary></pagefind-summary>
+        <pagefind-results></pagefind-results>
+      </div>
+      <aside class="search-filters" aria-label="Filters">
+        <pagefind-filter-pane open="decade,subject"></pagefind-filter-pane>
+      </aside>
+    </div>
+    <noscript>Search needs JavaScript. You can still
+      <a href={url('/browse/')}>browse by date and subject</a>.</noscript>
+      <link href={url('/pagefind/pagefind-component-ui.css')} rel="stylesheet" />
+  <script is:inline type="module" src={url('/pagefind/pagefind-component-ui.js')}></script>
+</Base>
+
+<style>
+  .search-layout { display: grid; gap: 2rem; }
+  .search-layout > * { min-width: 0; }
+  @media (min-width: 50rem) {
+    .search-layout { grid-template-columns: 1fr 16rem; }
+  }
+</style>

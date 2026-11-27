@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PacketCard from '../components/PacketCard.astro';
+
+// Newest first
+const packets = (await getCollection('packets')).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date));
+const scanned = packets.reduce((n, p) => n + p.data.negatives.length, 0);
+---
+<Base title="Bill Cunningham Archive (test)">
+  <h1>Photographs by Bill Cunningham (1908-1993)</h1>
+  <p class="meta">{packets.length} packets · {scanned} scans online so far</p>
+  <ul class="packet-grid">
+    {packets.map((packet) => <PacketCard packet={packet} />)}
+  </ul>
+</Base>

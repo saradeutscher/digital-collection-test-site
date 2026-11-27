@@ -1,0 +1,50 @@
+---
+import { url, formatDate } from '../lib/utils';
+
+interface Props {
+  packet: {
+    id: string;
+    data: {
+      title: string;
+      date: string;
+      dateApproximate: boolean;
+      place?: string;
+      negatives: { image: string }[];
+    };
+  };
+}
+
+const { packet } = Astro.props;
+const { title, date, dateApproximate, place, negatives } = packet.data;
+const first = negatives[0];
+---
+
+<li class="card">
+  <a href={url(`/packets/${packet.id}/`)}>
+    {first ? (
+      <img
+        src={url(`/iiif/${first.image}/full/400,/0/default.jpg`)}
+        alt=""
+        width="400"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="no-scan" aria-hidden="true">Not yet scanned</div>
+    )}
+    <span class="card-title">{title}</span>
+  </a>
+  <p class="card-meta">
+    {formatDate(date, dateApproximate)}{place && ` · ${place}`}<br />
+    Packet {packet.id} · {negatives.length} {negatives.length === 1 ? 'scan' : 'scans'}
+  </p>
+</li>
+
+<style>
+  .card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .card a { text-decoration: none; display: block; }
+  .card img, .no-scan { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; background: #eee; }
+  .no-scan { display: grid; place-items: center; color: var(--muted); font-size: 0.9rem; }
+  .card-title { display: block; font-weight: 600; padding: 0.75rem 0.75rem 0; }
+  .card-meta { color: var(--muted); font-size: 0.875rem; margin: 0.25rem 0.75rem 0.75rem; }
+</style>

@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { url, slugify, year, decade } from '../../lib/utils';
+
+const packets = await getCollection('packets');
+
+// Group years under their decade
+const decades = new Map<string, Set<string>>();
+for (const p of packets) {
+  const d = decade(p.data.date);
+  if (!decades.has(d)) decades.set(d, new Set());
+  decades.get(d)!.add(year(p.data.date));
+}
+
+// Count packets per subject
+const subjects = new Map<string, number>();
+for (const p of packets) for (const s of p.data.subjects)
+subjects.set(s, (subjects.get(s) ?? 0) + 1);
+---
+
+<Base title="Browse">
+  <h1>Browse the collection</h1>
+
+  <h2>By date</h2>
+  {[...decades.entries()].sort().map(([d, years]) => (
+    <section>
+      <h3>{d}</h3>
+      <ul class="tag-list">
+        {[...years].sort().map((y) => <li><a href={url(`/browse/year/${y}/`)}>{y}</a></li>)}
+      </ul>
+    </section>
+  ))}
+
+  <h2>By subject</h2>
+  <ul class="tag-list">
+    {[...subjects.entries()].sort().map(([s, n]) => (
+      <li><a href={url(`/browse/subject/${slugify(s)}/`)}>{s} ({n})
+      </a></li>
+    ))}
+  </ul>
+</Base>

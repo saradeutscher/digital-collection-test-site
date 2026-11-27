@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import { url } from '../lib/utils';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Photographs by Bill Cunningham (1908-1993)' } = Astro.props;
+const siteName = 'Bill Cunningham Archive (test)';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>
+      {title === siteName ? title : `${title} | ${siteName}`}
+    </title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="site-name" href={url('/')}>{siteName}</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href={url('/')}>All packets</a></li>
+          <li><a href={url('/browse/')}>Browse</a></li>
+          <li><a href={url('/search/')}>Search</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+    <p>Test site with sample data. Not the real catalogue.</p>
+    </footer>
+  </body>
+</html>

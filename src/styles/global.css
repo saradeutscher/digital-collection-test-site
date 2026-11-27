@@ -1,0 +1,55 @@
+/* Placeholder styles */
+:root {
+  --ink: #1b1b1b;
+  --muted: #595959; /* 7:1 contrast on white */
+  --paper: #ffffff;
+  --rule: #d6d6d6;
+  --accent: #0b5cad;
+  --max: 70rem;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus { left: 1rem; top: 1rem; background: var(--paper); padding: 0.5rem; z-index: 10; }
+
+.site-header, main, .site-footer { max-width: var(--max); margin: 0 auto; padding: 1rem; }
+.site-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid var(--rule); }
+.site-name { font-weight: 700; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+.site-header ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+.site-footer { color: var(--muted); font-size: 0.875rem; border-top: 1px solid var(--rule); margin-top: 3rem; }
+
+h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.2; margin: 1.5rem 0 0.5rem; }
+.meta { color: var(--muted); margin: 0 0 1.5rem; }
+
+/* Packet list: one column on phones, more on wider screens */
+.packet-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); list-style: none; padding: 0; }
+
+dl.record { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 1rem; }
+dl.record dt { font-weight: 600; }
+dl.record dd { margin: 0; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0; }
+.tag-list a { display: inline-block; padding: 0.15rem 0.6rem; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; }
+
+/* Scan gallery on packet pages (nav is added by JavaScript) */
+scan-gallery { display: block; margin-bottom: 2rem; }
+scan-gallery:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.gallery-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
+.gallery-nav button { font: inherit; padding: 0.4rem 0.9rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); cursor: pointer; }
+.gallery-nav button:hover { border-color: var(--accent); }
+.gallery-nav button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.gallery-thumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+.gallery-thumbs button { padding: 0; border: 2px solid transparent; border-radius: 4px; background: #111; cursor: pointer; overflow: hidden; line-height: 0; opacity: 0.65; }
+.gallery-thumbs button:hover { opacity: 1; }
+.gallery-thumbs button[aria-current="true"] { border-color: var(--accent); opacity: 1; }
+.gallery-thumbs button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.gallery-thumbs img { width: 6rem; height: 4.5rem; object-fit: cover; }

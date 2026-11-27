@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PacketCard from '../../../components/PacketCard.astro';
+import { slugify } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  const packets = await getCollection('packets');
+  const subjects = [...new Set(packets.flatMap((p) => p.data.subjects))];
+  return subjects.map((subject) => ({
+    params: { subject: slugify(subject) },
+    props: {
+      subject,
+      packets: packets
+        .filter((p) => p.data.subjects.includes(subject))
+        .sort((a, b) => a.data.date.localeCompare(b.data.date)),
+    },
+  }));
+}
+
+const { subject, packets } = Astro.props;
+---
+
+<Base title={subject}>
+  <h1>{subject}</h1>
+  <p class="meta">{packets.length} {packets.length === 1 ? 'packet' : 'packets'}</p>
+  <ul class="packet-grid">
+    {packets.map((packet) => <PacketCard packet={packet} />)}
+  </ul>
+</Base>

@@ -1,0 +1,32 @@
+{
+  "name": "digital-collection-test-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "tiles": "node scripts/make-tiles.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saradeutscher/digital-collection-test-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saradeutscher/digital-collection-test-site/issues"
+  },
+  "homepage": "https://github.com/saradeutscher/digital-collection-test-site#readme",
+  "dependencies": {
+    "astro": "^7.4.13",
+    "openseadragon": "^6.1.1",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "pagefind": "^1.6.0"
+  }
+}

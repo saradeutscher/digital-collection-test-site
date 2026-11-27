@@ -1,0 +1,30 @@
+{
+  "@context": "http://iiif.io/api/image/3/context.json",
+  "id": "https://example.org/iiif/neg-08",
+  "type": "ImageService3",
+  "profile": "level0",
+  "protocol": "http://iiif.io/api/image",
+  "tiles": [
+    {
+      "scaleFactors": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "width": 512
+    }
+  ],
+  "width": 3000,
+  "height": 2485,
+  "sizes": [
+    {
+      "width": 400,
+      "height": 331
+    },
+    {
+      "width": 1200,
+      "height": 994
+    }
+  ]
+}

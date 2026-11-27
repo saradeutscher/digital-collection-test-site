@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1955-0001",
+    "title": "43rd Grey Cup game at Empire Stadium",
+    "date": "1955-11-26",
+    "place": "Empire Stadium, Vancouver",
+    "subjects": ["Football", "Sports"],
+    "people": [],
+    "negatives": [
+      { "id": "1955-0001-01", "image": "neg-01", "caption": "A player is tackled during the game" },
+      { "id": "1955-0001-02", "image": "neg-02", "caption": "A player catching a pass during the game" },
+      { "id": "1955-0001-03", "image": "neg-03", "caption": "A player is tackled during the game" },
+      { "id": "1955-0001-04", "image": "neg-04", "caption": "A player is tackled during the game" },
+      { "id": "1955-0001-05", "image": "neg-05", "caption": "A player is tackled during the game" },
+      { "id": "1955-0001-06", "image": "neg-06", "caption": "A player is tackled during the game" }
+    ]
+  },
+  {
+    "id": "1948-0001",
+    "title": "Bing Crosby at City Hall",
+    "date": "1948-09-21",
+    "place": "City Hall, Vancouver",
+    "subjects": ["Person"],
+    "people": ["Bing Crosby", "George C. Miller"],
+    "negatives": [
+      { "id": "1948-0001-01", "image": "neg-07", "caption": "Bing at City Hall" },
+      { "id": "1948-0001-02", "image": "neg-08", "caption": "Bing with acting-Mayor George C. Miller on steps of City Hall admiring gift of 'Haida' slate totem pole" }
+    ]
+  },
+  {
+    "id": "1953-0001",
+    "title": "Charles Cates Storytelling in Stanley Park",
+    "date": "1953-11-03",
+    "place": "Stanley Park, Vancouver",
+    "subjects": ["First Nations", "Indigenous", "Children"],
+    "people": ["Charles Cates"],
+    "negatives": [{ "id": "1953-0001-01", "image": "neg-09", "caption": "Charles Cates Storytelling in Stanley Park" }]
+  },
+  {
+    "id": "1957-0001",
+    "title": "Firefighters standing in water with water hose at waterfront fire",
+    "date": "1957",
+    "dateApproximate": true,
+    "place": "Vancouver",
+    "subjects": ["Firefighters", "Boats", "Piers"],
+    "people": [],
+    "negatives": [{ "id": "1957-0001-01", "image": "neg-10", "caption": "Firefighters aiming hose at waterfront fire, fireboat in background" }]
+  },
+  {
+    "id": "1948-0001",
+    "title": "Group portrait of firefighters aboard a fire truck",
+    "date": "1948",
+    "dateApproximate": true,
+    "place": "Vancouver",
+    "subjects": ["Firefighters", "Portraits"],
+    "people": [],
+    "negatives": [
+      { "id": "1948-0001-01", "image": "neg-11", "caption": "Group portrait of firefighters" }
+    ]
+  },
+  {
+    "id": "1949-0045",
+    "title": "Placeholder 1",
+    "date": "1949-01",
+    "place": "Hastings Street, Vancouver",
+    "subjects": ["Weather", "Street scenes"],
+    "people": [],
+    "negatives": []
+  },
+  {
+    "id": "1951-0177",
+    "title": "Placeholder 2",
+    "date": "1951-06-15",
+    "place": "Capilano Stadium, Vancouver",
+    "subjects": ["Baseball", "Sports"],
+    "people": [],
+    "negatives": []
+  },
+  {
+    "id": "1952-0347",
+    "title": "Placeholder 3",
+    "date": "1952-09-13",
+    "place": "Stanley Park, Vancouver",
+    "subjects": ["Football", "Sports"],
+    "people": [],
+    "negatives": []
+  },
+  {
+    "id": "1954-0402",
+    "title": "Placeholder 4",
+    "date": "1954-08-07",
+    "place": "Stanley Park, Vancouver",
+    "subjects": ["Running", "Sports"],
+    "people": ["Unidentified runners"],
+    "negatives": []
+  },
+  {
+    "id": "1955-0019",
+    "title": "Placeholder 5",
+    "date": "1955",
+    "dateApproximate": true,
+    "place": "Kerrisdale Arena, Vancouver",
+    "subjects": ["Curling", "Sports"],
+    "people": [],
+    "negatives": []
+  },
+  {
+    "id": "1958-0288",
+    "title": "Placeholder 6",
+    "date": "1958-05-24",
+    "place": "North Vancouver",
+    "subjects": ["Ships", "Industry"],
+    "people": [],
+    "negatives": []
+  },
+  {
+    "id": "1960-0133",
+    "title": "Placeholder 7",
+    "date": "1960-07-30",
+    "place": "Exhibition Park, Vancouver",
+    "subjects": ["Horse racing", "Sports"],
+    "people": [],
+    "negatives": []
+  },
+  {
+    "id": "1962-0071",
+    "title": "Placeholder 8",
+    "date": "1962-02-17",
+    "place": "English Bay, Vancouver",
+    "subjects": ["Swimming", "Sports"],
+    "people": [],
+    "negatives": []
+  }
+]

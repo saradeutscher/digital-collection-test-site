@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ZoomViewer from '../../components/ZoomViewer.astro';
+import { url, slugify, formatDate, year, decade } from '../../lib/utils';
+
+// Runs once at build time
+export async function getStaticPaths() {
+  const packets = await getCollection('packets');
+  return packets.map((packet) => ({
+    params: { id: packet.id },
+    props: { packet },
+  }));
+}
+
+const { packet } = Astro.props;
+const { title, date, dateApproximate, place, subjects, people, negatives } = packet.data;
+const when = formatDate(date, dateApproximate);
+---
+
+<Base title={title} description={`${title}, ${when}. Photographs by Bill Cunningham. `}>
+  <article data-pagefind-body>
+    <h1>{title}</h1>
+    <p class="meta">
+      {when}{place && ` · ${place}`}
+      {people.length > 0 && (<><br />Pictured: {people.join('; ')} </>)}
+    </p>
+
+    {negatives.length > 0 ? (
+      <scan-gallery>
+        {negatives.map((neg) => (
+          <ZoomViewer image={neg.image} label={neg.caption ?
+          `${neg.caption} (negative ${neg.id})` : `Negative ${neg.id}`} />
+        ))}
+      </scan-gallery>
+    ) : (
+      <p><em>This packet hasn't been scanned yet.</em></p>
+    )}
+
+    <h2 data-pagefind-ignore>Catalogue record</h2>
+    <dl class="record" data-pagefind-ignore>
+      <dt>Packet</dt><dd>{packet.id}</dd>
+      <dt>Date</dt><dd><a href={url(`/browse/year/${year(date)}/`)}>
+        {when}</a></dd>
+      {place && (<><dt>Place</dt><dd>{place}</dd></>)}
+      {people.length > 0 && (<><dt>People</dt><dd>{people.join('; ')}</dd></>)}
+      <dt>Scans</dt><dd>{negatives.length}</dd>
+    </dl>
+
+    <h2 data-pagefind-ignore>Subjects</h2>
+    <ul class="tag-list">
+      {subjects.map((s) => <li><a href={url(`/browse/subject/${slugify(s)}/`)}>{s}</a></li>)}
+    </ul>
+
+    <div hidden data-pagefind-ignore>
+      <span data-pagefind-filter="decade">{decade(date)}</span>
+      {subjects.map((s) => <span data-pagefind-filter="subject">{s}</span>)}
+      {place && <span data-pagefind-filter="place">{place}</span>}
+      <span data-pagefind-meta="date">{when}</span>
+    </div>
+  </article>
+</Base>
+
+<script>
+  // Turns the scans into a gallery with Previous/Next buttons.
+  // Without JavaScript all scans stay visible, one under another.
+  class ScanGallery extends HTMLElement {
+    connectedCallback() {
+      const items = Array.from(this.querySelectorAll<HTMLElement>(':scope > figure'));
+      if (items.length < 2) return;
+      let current = 0;
+
+      const nav = document.createElement('div');
+      nav.className = 'gallery-nav';
+      nav.innerHTML = `
+        <button type="button" data-dir="-1">‹ Previous</button>
+        <span aria-live="polite"></span>
+        <button type="button" data-dir="1">Next ›</button>`;
+      this.prepend(nav);
+
+      // Row of small thumbnails to jump straight to a scan
+      const strip = document.createElement('div');
+      strip.className = 'gallery-thumbs';
+      const thumbs = items.map((el, i) => {
+        const viewer = el.querySelector<HTMLElement>('zoom-viewer');
+        const label = el.querySelector('img')?.alt ?? `Scan ${i + 1}`;
+        const src = (viewer?.dataset.info ?? '').replace(/info\.json$/, 'full/400,/0/default.jpg');
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', `Show scan ${i + 1}: ${label}`);
+        btn.innerHTML = `<img src="${src}" alt="" width="120" loading="lazy" />`;
+        btn.addEventListener('click', () => show(i));
+        strip.append(btn);
+        return btn;
+      });
+      nav.after(strip);
+      const status = nav.querySelector('span')!;
+      this.setAttribute('role', 'group');
+      this.setAttribute('aria-label', 'Scans in this packet');
+      this.tabIndex = 0;
+
+      const show = (n: number) => {
+        current = (n + items.length) % items.length;
+        items.forEach((el, i) => { el.hidden = i !== current; });
+        status.textContent = `Scan ${current + 1} of ${items.length}`;
+        thumbs.forEach((t, i) => {
+          if (i === current) t.setAttribute('aria-current', 'true');
+          else t.removeAttribute('aria-current');
+        });
+      };
+
+      nav.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('button');
+        if (btn) show(current + Number(btn.dataset.dir));
+      });
+      this.addEventListener('keydown', (e) => {
+        // Leave arrow keys alone while the zoom viewer is being used
+        if ((e.target as HTMLElement).closest('zoom-viewer')) return;
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+      show(0);
+    }
+  }
+  customElements.define('scan-gallery', ScanGallery);
+</script>

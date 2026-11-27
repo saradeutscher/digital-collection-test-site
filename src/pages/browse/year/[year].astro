@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PacketCard from '../../../components/PacketCard.astro';
+import { year } from '../../../lib/utils';
+
+// One page per year that has at least one packet
+export async function getStaticPaths() {
+  const packets = await getCollection('packets');
+  const years = [...new Set(packets.map((p) => year(p.data.date)))];
+  return years.map((y) => ({
+    params: { year: y },
+    props: {
+      packets: packets
+        .filter((p) => year(p.data.date) === y)
+        .sort((a, b) => a.data.date.localeCompare(b.data.date)),
+    },
+  }));
+}
+
+const { year: thisYear } = Astro.params;
+const { packets } = Astro.props;
+---
+
+<Base title={`Photographs from ${thisYear}`}>
+  <h1>{thisYear}</h1>
+  <p class="meta">{packets.length} {packets.length === 1 ? 'packet' : 'packets'}</p>
+  <ul class="packet-grid">
+    {packets.map((packet) => <PacketCard packet={packet} />)}
+  </ul>
+</Base>

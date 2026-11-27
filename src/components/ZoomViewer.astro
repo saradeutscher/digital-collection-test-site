@@ -1,0 +1,67 @@
+---
+import { url } from '../lib/utils';
+
+interface Props {
+  image: string; // folder name under public/iiif
+  label: string; // describes the photo for screen readers
+}
+
+const { image, label } = Astro.props;
+const infoUrl = url(`/iiif/${image}/info.json`);
+const previewUrl = url(`/iiif/${image}/full/1200,/0/default.jpg`);
+---
+
+<figure class="zoom">
+  <zoom-viewer data-info={infoUrl} data-icons={url('/osd-icons/')}>
+  <!-- Shown until the viewer loads, and if JavaScript is off -->
+  <img src={previewUrl} alt={label} width="1200" loading="lazy" />
+  </zoom-viewer>
+  <figcaption>
+    {label} <span data-pagefind-ignore>· <a href={previewUrl}>Open full-size image</a></span>
+  </figcaption>
+</figure>
+
+<style>
+  zoom-viewer { display: block; aspect-ratio: 4 / 3; background: #111; }
+  zoom-viewer img { width: 100%; height: 100%; object-fit: contain; }
+  figure.zoom { margin: 0 0 2rem; }
+  figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }
+</style>
+
+<script>
+  class ZoomViewer extends HTMLElement {
+    connectedCallback() {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          this.start();
+        }
+      });
+      observer.observe(this);
+    }
+
+    async start() {
+      const infoUrl = new URL(this.dataset.info!, window.location.href);
+      const [{ default: OpenSeadragon }, info] = await Promise.all([
+        import('openseadragon'),
+        fetch(infoUrl).then((r) => r.json()),
+      ]);
+      info.id = infoUrl.href.replace(/\/info\.json$/, '');
+
+      const label = this.querySelector('img')?.alt ?? 'Photograph';
+      this.innerHTML = '';
+      this.setAttribute('role', 'img');
+      this.setAttribute('aria-label', `${label}. Zoomable: use + and - keys
+        or scroll to zoom, arrow keys to move.`);
+
+      OpenSeadragon({
+        element: this,
+        tileSources: info,
+        prefixUrl: this.dataset.icons,
+        showNavigator: true,
+        gestureSettingsMouse: { scrollToZoom: true },
+      });
+    }
+  }
+  customElements.define('zoom-viewer', ZoomViewer);
+</script>
